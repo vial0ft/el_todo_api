@@ -13,9 +13,10 @@ defmodule ElTodoApi.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: ElTodoApi.PubSub},
       # Start the Endpoint (http/https)
-      ElTodoApiWeb.Endpoint
+      ElTodoApiWeb.Endpoint,
       # Start a worker by calling: ElTodoApi.Worker.start_link(arg)
       # {ElTodoApi.Worker, arg}
+      ElTodoApi.TodoSupervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
