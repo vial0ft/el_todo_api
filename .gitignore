@@ -22,3 +22,7 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 el_todo_api-*.tar
 
+mix.lock
+
+/priv/
+

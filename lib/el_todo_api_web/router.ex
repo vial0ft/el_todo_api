@@ -10,6 +10,16 @@ defmodule ElTodoApiWeb.Router do
     resources "/", TodoController, except: [:new, :edit]
   end
 
+  scope "/swagger" do
+    forward "/", PhoenixSwagger.Plug.SwaggerUI,
+      otp_app: :el_todo_api,
+      swagger_file: "swagger.json"
+  end
+
+  def swagger_info do
+    ElTodoApiWeb.SwaggerInfo.swagger_info()
+  end
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
