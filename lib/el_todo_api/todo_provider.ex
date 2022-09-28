@@ -28,7 +28,7 @@ defmodule ElTodoApi.TodoProvider do
   def delete({account_id}, todo_id) do
     {id, _} = Integer.parse(todo_id)
     case send_msg(account_id, {:delete, id}) do
-      {:ok, todo} -> {:ok, Todo.destruct(todo)}
+      {:ok, ^todo_id} = ok_result -> ok_result
       other -> other
     end
   end
