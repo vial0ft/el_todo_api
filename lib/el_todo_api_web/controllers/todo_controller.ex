@@ -11,7 +11,7 @@ defmodule ElTodoApiWeb.TodoController do
       ElTodoApiWeb.SwaggerInfo.schema
     end
 
-  swagger_path :index do
+  swagger_path :fetch_all do
     get("/api")
     produces "application/json"
     description("List of todos")
@@ -19,8 +19,7 @@ defmodule ElTodoApiWeb.TodoController do
     response(code(:not_found), "Not Found")
   end
 
-  # req_headers
-  def index(conn, _params) do
+  def fetch_all(conn, _params) do
     get_user(conn)
     |> TodoProvider.get_all()
     |> case do
@@ -33,7 +32,7 @@ defmodule ElTodoApiWeb.TodoController do
     end
   end
 
-  swagger_path :show do
+  swagger_path :get_by_id do
     get "/api/{id}"
     produces "application/json"
     ElTodoApiWeb.SwaggerInfo.id_todo_param
@@ -42,7 +41,7 @@ defmodule ElTodoApiWeb.TodoController do
     response(code(:not_found), "Not Found")
   end
 
-  def show(conn, %{"id" => todo_id}) do
+  def get_by_id(conn, %{"id" => todo_id}) do
     get_user(conn)
     |> TodoProvider.get_by_id(todo_id)
     |> case  do
@@ -52,7 +51,6 @@ defmodule ElTodoApiWeb.TodoController do
         |> put_status(:not_found)
     end
   end
-
 
   swagger_path :create do
     post "/api"
@@ -74,7 +72,7 @@ defmodule ElTodoApiWeb.TodoController do
   end
 
   swagger_path :update do
-    patch "/api/{id}"
+    put "/api/{id}"
     consumes "application/json"
     produces "application/json"
     ElTodoApiWeb.SwaggerInfo.id_todo_param

@@ -7,7 +7,12 @@ defmodule ElTodoApiWeb.Router do
 
   scope "/api", ElTodoApiWeb do
     pipe_through :api
-    resources "/", TodoController, except: [:new, :edit]
+
+    get "/", TodoController, :fetch_all
+    post "/", TodoController, :create
+    get "/:id", TodoController, :get_by_id
+    post "/:id", TodoController, :update
+    delete "/:id", TodoController, :delete
   end
 
   scope "/swagger" do
