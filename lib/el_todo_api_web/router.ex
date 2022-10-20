@@ -5,8 +5,12 @@ defmodule ElTodoApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug ElTodoApi.Guardian.AuthPipeline
+  end
+
   scope "/api", ElTodoApiWeb do
-    pipe_through :api
+    pipe_through [:api, :auth]
 
     get "/", TodoController, :fetch_all
     post "/", TodoController, :create

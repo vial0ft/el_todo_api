@@ -122,7 +122,8 @@ defmodule ElTodoApiWeb.TodoController do
     %{error: Atom.to_string(type), msg: msg}
   end
 
-  def get_user(_conn) do
-    {"admin"}
+  @spec get_user(atom | %{:private => any, optional(any) => any}) :: {<<_::40>>}
+  def get_user(conn) do
+    {conn.private[:guardian_default_resource]}
   end
 end

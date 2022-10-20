@@ -36,6 +36,11 @@ config :el_todo_api, :phoenix_swagger,
     ]
   }
 
+# Guardian config
+config :el_todo_api, ElTodoApi.Guardian,
+ issuer: "el_auth_service",
+ secret_key: "secret"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
